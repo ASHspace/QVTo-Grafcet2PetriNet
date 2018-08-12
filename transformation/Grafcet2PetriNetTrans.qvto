@@ -52,5 +52,3 @@ mapping Grafcet::StepToTransition::Step2Trans(): PetriNet::PlaceToTransition
 
 
 
-
-
