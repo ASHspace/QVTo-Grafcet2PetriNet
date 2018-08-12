@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ASCII"?>
+<uriMap:MappingContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:uriMap="http:///www.eclipse.org/m2m/qvt/oml/MModelUriMap/1.0.0">
+  <mapping sourceURI="http://com.grafcet" targetURI="platform:/resource/G2PQVTo/metamodel/Grafcet.ecore"/>
+  <mapping sourceURI="http://com.petrinet" targetURI="platform:/resource/G2PQVTo/metamodel/PetriNet.ecore"/>
+</uriMap:MappingContainer>

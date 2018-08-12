@@ -1,0 +1,56 @@
+modeltype Gradcets uses 'http://com.grafcet';
+modeltype Petrinets uses 'http://com.petrinet';
+
+transformation Grafcet2PetriNetTrans(in src:Gradcets, out dst:Petrinets);
+
+main() {
+	src.rootObjects()[Grafcet]->map Gradcets2Petrinets();
+}
+
+
+mapping Gradcets::Grafcet::Gradcets2Petrinets(): Petrinets::PetriNet
+{
+	name := self.name;
+	location := self.location;
+
+	elements += self.elements[Transition]->map Trans2Trans();
+	elements += self.elements[Step]->map Step2Place();
+
+	arcs += self.connections[TransitionToStep] ->map Trans2Step();
+	arcs += self.connections[StepToTransition] ->map Step2Trans();
+}
+
+
+mapping  Grafcet::Transition::Trans2Trans(): PetriNet::Transition
+{
+	name :=self.name;
+	location := self.location;
+	incomingArc := self.incomingConnections->map Step2Trans();
+	outgoingArc += self.outgoingConnections->map Trans2Step();
+}
+
+mapping  Grafcet::Step::Step2Place(): PetriNet::Place
+{
+	name := self.name;
+	location := self.location;
+	incomingArc := self.incomingConnections->map Trans2Step();
+	outgoingArc := self.outgoingConnections->map Step2Trans();
+	
+}
+
+mapping Grafcet::TransitionToStep::Trans2Step(): PetriNet::TransitionToPlace
+{
+	name := self.name;
+	location :=self.location;
+}
+
+mapping Grafcet::StepToTransition::Step2Trans(): PetriNet::PlaceToTransition
+{
+	name := self.name;
+	location := self.location;	
+}
+
+
+
+
+
